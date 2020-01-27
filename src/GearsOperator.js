@@ -84,7 +84,7 @@ class GearParameter extends ZeaEngine.StructParameter {
 /** Class representing a gears operator.
  * @extends Operator
  */
-class GearsOperator extends Operator {
+class GearsOperator extends ZeaEngine.Operator {
   /**
    * Create a gears operator.
    * @param {string} name - The name value.
@@ -93,9 +93,9 @@ class GearsOperator extends Operator {
     super(name)
 
     this.__revolutionsParam = this.addParameter(
-      new NumberParameter('Revolutions', 0.0)
+      new ZeaEngine.NumberParameter('Revolutions', 0.0)
     )
-    const rpmParam = this.addParameter(new NumberParameter('RPM', 0.0)) // revolutions per minute
+    const rpmParam = this.addParameter(new ZeaEngine.NumberParameter('RPM', 0.0)) // revolutions per minute
     this.__timeoutId
     rpmParam.valueChanged.connect(() => {
       const rpm = rpmParam.getValue()
@@ -117,7 +117,7 @@ class GearsOperator extends Operator {
       }
     })
     this.__gearsParam = this.addParameter(
-      new ListParameter('Gears', GearParameter)
+      new ZeaEngine.ListParameter('Gears', GearParameter)
     )
     this.__gearsParam.elementAdded.connect((value, index) => {
       this.addOutput(value.getOutput())
@@ -153,7 +153,7 @@ class GearsOperator extends Operator {
 
       const rot = revolutions * gear.getRatio() + gear.getOffset()
 
-      const quat = new Quat()
+      const quat = new ZeaEngine.Quat()
       quat.setFromAxisAndAngle(gear.getAxis(), rot * Math.PI * 2.0)
       // const initialxfo = output.getInitialValue().clone();
       const xfo = output.getValue()
