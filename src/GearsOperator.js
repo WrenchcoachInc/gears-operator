@@ -1,18 +1,8 @@
-import { Vec3, Quat } from '../../Math'
-import { Operator } from './Operator.js'
-import { XfoOperatorOutput } from './OperatorOutput.js'
-import {
-  StructParameter,
-  NumberParameter,
-  Vec3Parameter,
-  ListParameter,
-} from '../Parameters'
-import { sgFactory } from '../SGFactory.js'
 
 /** Class representing a gear parameter.
  * @extends StructParameter
  */
-class GearParameter extends StructParameter {
+class GearParameter extends ZeaEngine.StructParameter {
   /**
    * Create a gear parameter.
    * @param {string} name - The name value.
@@ -20,12 +10,12 @@ class GearParameter extends StructParameter {
   constructor(name) {
     super(name)
 
-    this.__ratioParam = this._addMember(new NumberParameter('Ratio', 1.0))
-    this.__offsetParam = this._addMember(new NumberParameter('Offset', 0.0))
+    this.__ratioParam = this._addMember(new ZeaEngine.NumberParameter('Ratio', 1.0))
+    this.__offsetParam = this._addMember(new ZeaEngine.NumberParameter('Offset', 0.0))
     this.__axisParam = this._addMember(
-      new Vec3Parameter('Axis', new Vec3(1, 0, 0))
+      new ZeaEngine.Vec3Parameter('Axis', new ZeaEngine.Vec3(1, 0, 0))
     )
-    this.__output = new XfoOperatorOutput('Gear')
+    this.__output = new ZeaEngine.XfoOperatorOutput('Gear')
   }
 
   /**
@@ -206,6 +196,6 @@ class GearsOperator extends Operator {
   }
 }
 
-sgFactory.registerClass('GearsOperator', GearsOperator)
+ZeaEngine.sgFactory.registerClass('GearsOperator', GearsOperator)
 
 export { GearsOperator }
